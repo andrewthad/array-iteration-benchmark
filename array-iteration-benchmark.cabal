@@ -1,0 +1,32 @@
+cabal-version: 2.2
+name: array-iteration-benchmark
+version: 0.1.0.0
+synopsis: Performance of various array iterating schemes
+homepage: https://github.com/andrewthad/array-iteration-benchmark
+license: BSD-3-Clause
+license-file: LICENSE
+author: Andrew Martin
+maintainer: andrew.thaddeus@gmail.com
+copyright: 2019 Andrew Martin
+category: Development
+
+library
+  exposed-modules: LowToHigh HighToLowNeq HighToLowCase HighToLowGt
+  build-depends:
+    , base >=4.12.0.0 && <5
+    , primitive ^>=0.6.4
+  hs-source-dirs: src
+  default-language: Haskell2010
+  ghc-options: -Wall -O2 -ddump-simpl -dsuppress-all -ddump-stg -ddump-asm -ddump-to-file
+
+benchmark bench
+  type: exitcode-stdio-1.0
+  build-depends:
+    , array-iteration-benchmark
+    , base >=4.12.0.0 && <5
+    , criterion ^>=1.5.4
+    , primitive ^>=0.6.4
+  ghc-options: -Wall -O2
+  default-language: Haskell2010
+  hs-source-dirs: bench
+  main-is: Main.hs
