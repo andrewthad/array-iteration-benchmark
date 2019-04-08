@@ -7,10 +7,11 @@ module HighToLowGt
 import Data.Primitive
 import Control.Monad.Primitive
 
+-- Why not inline? See https://gitlab.haskell.org/ghc/ghc/issues/16556
+{-# NOINLINE incrementHighToLowGt #-}
 incrementHighToLowGt :: MutablePrimArray RealWorld Int -> IO ()
 incrementHighToLowGt m = modify' (+1) m
 
--- | Strictly modify the elements of a mutable array in-place.
 modify' :: (Prim a, PrimMonad m)
   => (a -> a)
   -> MutablePrimArray (PrimState m) a
